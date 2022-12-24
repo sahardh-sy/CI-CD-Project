@@ -26,6 +26,7 @@ public class Stock implements Serializable {
 	private Long idStock;
 	private String libelleStock;
 	private Integer qte;
+	private String test;
 	private Integer qteMin;
 	@OneToMany(mappedBy = "stock")
 	@JsonIgnore
