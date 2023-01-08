@@ -4,13 +4,8 @@ pipeline {
         maven '3.8.6'
     }    
     environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "192.168.1.113:8081"
-        NEXUS_REPOSITORY = "maven-nexus-repo"
-        NEXUS_CREDENTIAL_ID = "nexus3"
+       
         imageName = "gestionAchats"
-        registry = 'http://192.168.1.113:8081/'
         registry="sahar24/front_back"
     	registryCredential='dockerHub'
     	dokerImage="front_back"
