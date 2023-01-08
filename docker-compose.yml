@@ -12,7 +12,7 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - './.mysql-data/db:/var/lib/mysql'
-  app:
+  backend:
     depends_on:
       - mysqldb
     image: back_achat
@@ -29,4 +29,9 @@ services:
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
+     frontend:
+    image: front_back:1.0
+    restart: on-failure
+    ports:
+      - "4200:80"
    
