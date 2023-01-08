@@ -8,6 +8,7 @@ pipeline {
         imageName = "back_achat"
         registry="sahar24/front_back"
     	registryCredential='dockerHub'
+    	DOCKERHUB_CREDENTIALS=credentials('dockerhub-cred')
     	dokerImage="back_achat"
     }
 
@@ -63,7 +64,13 @@ pipeline {
                     dockerImage = docker.build imageName + ":${commit_id}"
                 }
             }
-        }   
+        } 
+        stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}  
         stage("docker push") {
             steps{
                 script {
