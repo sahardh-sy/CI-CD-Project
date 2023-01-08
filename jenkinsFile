@@ -5,10 +5,10 @@ pipeline {
     }    
     environment {
        
-        imageName = "gestionAchats"
+        imageName = "back_achat"
         registry="sahar24/front_back"
     	registryCredential='dockerHub'
-    	dokerImage="front_back"
+    	dokerImage="back_achat"
     }
 
     stages {
