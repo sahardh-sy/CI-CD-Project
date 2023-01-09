@@ -70,7 +70,7 @@ pipeline {
 
                   echo 'image builded'
             }
-        }
+        
         stage("Push image"){
             steps {
                  script{
@@ -90,11 +90,10 @@ pipeline {
         }
 
     
-     
+    
     }
 	environment {
         
-       
         IMAGETAG = "${env.BUILD_ID}"
     }
 }
