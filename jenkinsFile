@@ -57,29 +57,38 @@ pipeline {
             }
         }
         
-        stage('Build Docker image ') {
-           
+		
+		
+		stage("Build image"){
             steps {
-                script {
-                    dockerImage = docker.build imageName + ":${commit_id}"
-                }
-            }
-        } 
-        stage('Login') {
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}  
-        stage("docker push") {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()   
-                }
-                }
+                sh '''
+                
+                docker build -t sahar24/back_achat:${commit_id}}  . 
+
+                '''
+
+                  echo 'image builded'
             }
-        }   
+        }
+        stage("Push image"){
+            steps {
+                 script{
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub-cred',
+                    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                        env.REG_USERNAME = USERNAME
+                        env.REG_PASSWORD = PASSWORD
+                    }
+
+               sh ''' 
+               docker login --username=${REG_USERNAME} --password=${REG_PASSWORD}
+                docker push sahar24/back_achat:${IMAGETAG} 
+                '''
+
+            }
+            }
+        }
+
          
      
     }
