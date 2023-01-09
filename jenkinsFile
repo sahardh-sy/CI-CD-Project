@@ -54,7 +54,7 @@ pipeline {
 
                 sh '''
                 
-                docker build -t sahar24/back_achat:${commit_id} . 
+                docker build -t sahar24/back_achat:${IMAGETAG} . 
 
                 '''
 
