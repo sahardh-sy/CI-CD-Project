@@ -10,6 +10,7 @@ pipeline {
     	registryCredential='dockerHub'
     	DOCKERHUB_CREDENTIALS=credentials('dockerhub-cred')
     	dokerImage="back_achat"
+		IMAGETAG = "${env.BUILD_ID}"
     }
 
     stages {
@@ -64,13 +65,13 @@ pipeline {
 
                 sh '''
                 
-                docker build -t sahar24/back_achat:${IMAGETAG}}  . 
+                docker build -t sahar24/back_achat:${commit_id}}  . 
 
                 '''
 
                   echo 'image builded'
             }
-        
+        }
         stage("Push image"){
             steps {
                  script{
@@ -90,10 +91,7 @@ pipeline {
         }
 
     
-    
+     
     }
-	environment {
-        
-        IMAGETAG = "${env.BUILD_ID}"
-    }
+
 }
